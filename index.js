@@ -124,6 +124,7 @@ let manoJugador = [];
 const reiniciarMazo = () => {
     mazoInicial = [];
     mazoUsado = [];
+    juegoActual = 0;
     for (let i = 1; i <= 13; i++) {
         let valor = 0;
         
@@ -194,9 +195,4 @@ const reiniciarManos = () => {
     manoJugador = []
     cartaCupier = null;
 }
-
 reiniciarMazo();
-console.log(seleccionarCarta("2","Corazon","Jugador"));
-console.log(seleccionarCarta("2","Pica","Jugador"));
-console.log(seleccionarCarta("2","Trebol","Cupier"));
-

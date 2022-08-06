@@ -1,0 +1,52 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.GameTable{
+    height: 100%;
+    background-color: rgb(26 96 5);
+ }
+
+ .tittleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .BlackJackTittle{
+    color: white;
+    padding: 5px;
+ }
+
+ .CroupierContainer, .PlayerContainer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .CardContainer{
+    border: 2px solid yellow;
+    width: 140px;
+    height: 240px;
+    margin-left: 5px;
+    margin-right: 5px;
+ }
+
+ .CardAddContainer{
+    border: 2px dashed yellow;
+    width: 140px;
+    height: 240px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ 
+ .bi-plus-lg{
+    font-size: 60px;
+    color: yellow;
+ }

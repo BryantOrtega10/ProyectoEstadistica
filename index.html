@@ -19,8 +19,13 @@
             <div class="ResetDeckContainer">
                 <button type="button" class="btn btn-outline-warning" id="ResetDeckButton" onclick="resetDeck()">Reiniciar Mazo</button>
             </div>
-            <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Cupier">
-                <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="CrupierCard">
+            <div class="CrupierCardsContainer">
+                <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Cupier">
+                    <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="CrupierCard-1">
+                </div>
+                <div class="CardAddContainer" onclick="addCrupierCard()">
+                    <i class="bi bi-plus-lg"></i>
+                </div>
             </div>
             <div class="ResetHandContainer">
                 <button type="button" class="btn btn-outline-warning" id="ResetHandButton" onclick="resetHand()">Reinciar Mano</button>

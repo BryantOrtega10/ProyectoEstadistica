@@ -1,5 +1,4 @@
 class Carta {
-
 	constructor(valor, valor2, numero, pinta) {
 		this.valor = valor; //+1, 0, -1
 		this.valor2 = valor2; //2,3, ..., 11
@@ -371,15 +370,14 @@ let matrizEstrategiaPares = {
 	},
 };
 
-
 let mazoInicial = [];
 let mazoUsado = [];
 let juegoActual = 0;
 
-
 let manoJugador = [];
 let manoCupier = [];
 let numCartasJugador = 1;
+let numCartasCrupier = 1;
 
 // Indica si la seleccion es para el Crupier o para el jugador
 const cardSelectionModal = document.getElementById("CardSelection");
@@ -436,7 +434,7 @@ const seleccionarCarta = (numero, pinta, mano) => {
 		if (mano == "Jugador") {
 			manoJugador.push(cartaSeleccionada);
 		} else if (mano == "Cupier") {
-            manoCupier.push(cartaSeleccionada);
+			manoCupier.push(cartaSeleccionada);
 		}
 		return { valorMesa: juegoActual, estrategia: obtenerEstrategia() };
 	} else {
@@ -470,7 +468,9 @@ const obtenerEstrategia = () => {
 			if (suma <= 7)
 				return matrizEstrategiaCartasDuras[manoCupier[0].valor2][7];
 			else if (suma >= 17)
-				return matrizEstrategiaCartasDuras[manoCupier[0].valor2][20];
+				return matrizEstrategiaCartasDuras[
+					manoCupier[0].valor2
+				][20];
 			else
 				return matrizEstrategiaCartasDuras[manoCupier[0].valor2][
 					suma
@@ -487,14 +487,28 @@ const reiniciarManos = () => {
 };
 
 const updateCrupierCard = () => {
-	const crupierCard = document.getElementById("CrupierCard");
-	const imgName = cartaCupier == null ? "Volteada" : cartaCupier.getCarta();
-	const imgAlt =
-		cartaCupier == null
-			? "Carta sin seleccionar"
-			: cartaCupier.getCarta();
-	crupierCard.setAttribute("src", `imgs/${imgName}.png`);
-	crupierCard.setAttribute("alt", imgAlt);
+	if (manoCupier.length != 0) {
+		for (let i = 1; i <= manoCupier.length; i++) {
+			const crupierCard = manoCupier[i - 1];
+			const imgCard = document.getElementById(`CrupierCard-${i}`);
+			imgCard.setAttribute(
+				"src",
+				`imgs/${crupierCard.getCarta()}.png`
+			);
+			imgCard.setAttribute("alt", crupierCard.getCarta());
+		}
+	} else {
+		const crupierCardsContainerDiv = document
+			.getElementsByClassName("CrupierCardsContainer")
+			.item(0);
+		const basicHtml = `<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Cupier">
+								<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="CrupierCard-1">
+							</div>
+							<div class="CardAddContainer" onclick="addCrupierCard()">
+								<i class="bi bi-plus-lg"></i>
+							</div>`;
+		crupierCardsContainerDiv.innerHTML = basicHtml;
+	}
 };
 
 const updatePlayerCard = () => {
@@ -520,7 +534,7 @@ const updatePlayerCard = () => {
 };
 
 // Actualiza las cartes, las seleccionadas anteriormente se deshabilitan
-const updateCards = () => {
+const updateCards = (mano) => {
 	for (const card of mazoUsado) {
 		const usedCard = document.getElementById(
 			`${card.numero + card.pinta}`
@@ -528,8 +542,11 @@ const updateCards = () => {
 		usedCard.removeEventListener("click", clickCarta);
 		usedCard.style.opacity = "0.5";
 	}
-	updateCrupierCard();
-	updatePlayerCard();
+	if (mano == "Jugador") {
+		updatePlayerCard();
+	} else {
+		updateCrupierCard();
+	}
 };
 
 // Actualiza la estrategia mostrada en pantalla
@@ -581,7 +598,7 @@ const clickCarta = (e) => {
 		updateStrategy(resultado.estrategia);
 		updateTableState(resultado.valorMesa);
 	}
-	updateCards();
+	updateCards(mano);
 };
 
 // Añade una carta mas al total de cartas que dispone el jugador.
@@ -590,7 +607,7 @@ const addPlayerCard = () => {
 	const cardImg = document.createElement("img");
 	const addCartDiv = document
 		.getElementsByClassName("CardAddContainer")
-		.item(0);
+		.item(1);
 	const playerCardsContainerDiv = document
 		.getElementsByClassName("PlayerCardsContainer")
 		.item(0);
@@ -609,10 +626,36 @@ const addPlayerCard = () => {
 	playerCardsContainerDiv.append(addCartDiv);
 };
 
+// Añade una carta mas al total de cartas que dispone el Crupier.
+const addCrupierCard = () => {
+	const cardContainerDiv = document.createElement("div");
+	const cardImg = document.createElement("img");
+	const addCardDiv = document
+		.getElementsByClassName("CardAddContainer")
+		.item(0);
+	const crupierCardsContainerDiv = document
+		.getElementsByClassName("CrupierCardsContainer")
+		.item(0);
+	cardContainerDiv.setAttribute("class", "CardContainer");
+	cardContainerDiv.setAttribute("data-bs-toggle", "modal");
+	cardContainerDiv.setAttribute("data-bs-target", "#CardSelection");
+	cardContainerDiv.setAttribute("data-bs-whatever", "Cupier");
+	Object.assign(cardImg, {
+		className: "img-fluid",
+		src: `imgs/Volteada.png`,
+		alt: `Carta sin seleccionar`,
+		id: `CrupierCard-${++numCartasCrupier}`,
+	});
+	cardContainerDiv.append(cardImg);
+	addCardDiv.replaceWith(cardContainerDiv);
+	crupierCardsContainerDiv.append(addCardDiv);
+};
+
 // Reinicia graficamente las cartas en la mesa
 
 const resetHand = () => {
 	numCartasJugador = 1;
+	numCartasCrupier = 1;
 	reiniciarManos();
 	updateCrupierCard();
 	updatePlayerCard();
@@ -621,7 +664,6 @@ const resetHand = () => {
 
 // Reinicia graficamente las cartas del mazo
 const resetDeck = () => {
-	numCartasJugador = 1;
 	reiniciarMazo();
 	drawCards();
 	resetHand();

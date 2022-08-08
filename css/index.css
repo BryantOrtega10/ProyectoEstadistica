@@ -1,0 +1,91 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.GameTable{
+    height: 100%;
+    background-color: rgb(26 96 5);
+    border: 22px inset #6F4A4A;
+ }
+
+ .tittleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: yellow;
+ }
+
+ .BlackJackTittle{
+    color: white;
+    padding: 5px;
+ }
+
+ .CrupierContainer, .PlayerContainer{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .ResetDeckContainer, .ResetHandContainer{
+   display: flex;
+   justify-content: center;
+   width: 400px;
+ }
+
+ .PlayerCardsContainer{
+   display: flex;
+   justify-content: center;
+ }
+
+ .CardContainer{
+    border: 2px solid yellow;
+    width: 151px;
+    height: 240px;
+    margin-left: 5px;
+    margin-right: 5px;
+ }
+
+ .CardAddContainer{
+    border: 2px dashed yellow;
+    width: 140px;
+    height: 240px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+ .StrategyContainer, .TableStateContainer{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 500px;
+ }
+ 
+ .bi-plus-lg{
+    font-size: 60px;
+    color: yellow;
+ }
+
+ .imageContainer{
+   width: 61px;
+   transition: transform .4s ease;
+ }
+
+.imageContainer:hover{
+   transform: translateY(-5px);
+}
+
+.modal-content{
+   /* From https://css.glass */
+   background: rgba(255, 255, 255, 0.2);
+   border-radius: 16px;
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(5px);
+   -webkit-backdrop-filter: blur(5px);
+   border: 1px solid rgba(255, 255, 255, 0.3);
+}

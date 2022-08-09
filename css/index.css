@@ -34,7 +34,7 @@ html, body {
     padding: 5px;
  }
 
- .CrupierContainer, .PlayerContainer{
+ .CrupierContainer{
    margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
@@ -42,12 +42,19 @@ html, body {
     align-items: center;
  }
 
-
-
- .ResetDeckContainer, .ResetHandContainer{
+ .ResetDeckContainer, .ResetHandCrupierContainer{
    display: flex;
    justify-content: center;
    width: 400px;
+ }
+
+ .PlayerContainer{
+   margin-top: 20px;
+   margin-bottom: 20px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   border-top:1px dashed white 
  }
 
  .PlayerCardsContainer, .CrupierCardsContainer, .GameOptionsContainer{
@@ -103,7 +110,11 @@ html, body {
    padding-bottom: 10px;
 }
 
-.WinAmountTittle, .BetTittle{
+.WinAmountTittle, .StrategyTittle{
+   color: yellow;
+}
+
+.BetTittle{
    color: yellow;
    margin-right: 5px;
 }

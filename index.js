@@ -1,393 +1,393 @@
 class Carta {
-    constructor(valor, valor2, numero, pinta) {
-        this.valor = valor; //+1, 0, -1
-        this.valor2 = valor2; //2,3, ..., 11
-        this.numero = numero; //As,2,...,J,Q,K
-        this.pinta = pinta; //Picas, Corazon, Trebol, Diamante
-    }
+	constructor(valor, valor2, numero, pinta) {
+		this.valor = valor; //+1, 0, -1
+		this.valor2 = valor2; //2,3, ..., 11
+		this.numero = numero; //As,2,...,J,Q,K
+		this.pinta = pinta; //Picas, Corazon, Trebol, Diamante
+	}
 
-    getCarta() {
-        return this.numero + this.pinta;
-    }
+	getCarta() {
+		return this.numero + this.pinta;
+	}
 }
 
 class Jugador {
-    constructor() {
-        this.manoActual = [];
-        this.acumulado = 0;
-    }
-    reiniciarMano() {
-        this.manoActual = [];
-    }
-    modificarAcumulado(valor) {
-        this.acumulado += valor;
-    }
-    obtenerSumaManoActual(){
-        let suma = 0;
-        for (let i = 0; i < this.manoActual.length; i++) {
-            suma += this.manoActual[i].valor2;            
-        }
-        return suma;
-    }
+	constructor() {
+		this.manoActual = [];
+		this.acumulado = 0;
+	}
+	reiniciarMano() {
+		this.manoActual = [];
+	}
+	modificarAcumulado(valor) {
+		this.acumulado += valor;
+	}
+	obtenerSumaManoActual() {
+		let suma = 0;
+		for (let i = 0; i < this.manoActual.length; i++) {
+			suma += this.manoActual[i].valor2;
+		}
+		return suma;
+	}
 }
 
 let matrizEstrategiaCartasDuras = {
-    2: {
-        7: "P",
-        8: "P",
-        9: "D",
-        10: "D",
-        11: "D",
-        12: "P",
-        13: "Q",
-        14: "Q",
-        15: "Q",
-        16: "Q",
-        20: "Q",
-    },
-    3: {
-        7: "P",
-        8: "P",
-        9: "D",
-        10: "D",
-        11: "D",
-        12: "P",
-        13: "Q",
-        14: "Q",
-        15: "Q",
-        16: "Q",
-        20: "Q",
-    },
-    4: {
-        7: "P",
-        8: "P",
-        9: "D",
-        10: "D",
-        11: "D",
-        12: "Q",
-        13: "Q",
-        14: "Q",
-        15: "Q",
-        16: "Q",
-        20: "Q",
-    },
-    5: {
-        7: "P",
-        8: "D",
-        9: "D",
-        10: "D",
-        11: "D",
-        12: "Q",
-        13: "Q",
-        14: "Q",
-        15: "Q",
-        16: "Q",
-        20: "Q",
-    },
-    6: {
-        7: "P",
-        8: "D",
-        9: "D",
-        10: "D",
-        11: "D",
-        12: "Q",
-        13: "Q",
-        14: "Q",
-        15: "Q",
-        16: "Q",
-        20: "Q",
-    },
-    7: {
-        7: "P",
-        8: "P",
-        9: "P",
-        10: "D",
-        11: "D",
-        12: "P",
-        13: "P",
-        14: "P",
-        15: "P",
-        16: "P",
-        20: "Q",
-    },
-    8: {
-        7: "P",
-        8: "P",
-        9: "P",
-        10: "D",
-        11: "D",
-        12: "P",
-        13: "P",
-        14: "P",
-        15: "P",
-        16: "P",
-        20: "Q",
-    },
-    9: {
-        7: "P",
-        8: "P",
-        9: "P",
-        10: "D",
-        11: "D",
-        12: "P",
-        13: "P",
-        14: "P",
-        15: "P",
-        16: "P",
-        20: "Q",
-    },
-    10: {
-        7: "P",
-        8: "P",
-        9: "P",
-        10: "P",
-        11: "D",
-        12: "P",
-        13: "P",
-        14: "P",
-        15: "P",
-        16: "P",
-        20: "Q",
-    },
-    As: {
-        7: "P",
-        8: "P",
-        9: "P",
-        10: "D",
-        11: "D",
-        12: "P",
-        13: "P",
-        14: "P",
-        15: "P",
-        16: "P",
-        20: "Q",
-    },
+	2: {
+		7: "P",
+		8: "P",
+		9: "D",
+		10: "D",
+		11: "D",
+		12: "P",
+		13: "Q",
+		14: "Q",
+		15: "Q",
+		16: "Q",
+		20: "Q",
+	},
+	3: {
+		7: "P",
+		8: "P",
+		9: "D",
+		10: "D",
+		11: "D",
+		12: "P",
+		13: "Q",
+		14: "Q",
+		15: "Q",
+		16: "Q",
+		20: "Q",
+	},
+	4: {
+		7: "P",
+		8: "P",
+		9: "D",
+		10: "D",
+		11: "D",
+		12: "Q",
+		13: "Q",
+		14: "Q",
+		15: "Q",
+		16: "Q",
+		20: "Q",
+	},
+	5: {
+		7: "P",
+		8: "D",
+		9: "D",
+		10: "D",
+		11: "D",
+		12: "Q",
+		13: "Q",
+		14: "Q",
+		15: "Q",
+		16: "Q",
+		20: "Q",
+	},
+	6: {
+		7: "P",
+		8: "D",
+		9: "D",
+		10: "D",
+		11: "D",
+		12: "Q",
+		13: "Q",
+		14: "Q",
+		15: "Q",
+		16: "Q",
+		20: "Q",
+	},
+	7: {
+		7: "P",
+		8: "P",
+		9: "P",
+		10: "D",
+		11: "D",
+		12: "P",
+		13: "P",
+		14: "P",
+		15: "P",
+		16: "P",
+		20: "Q",
+	},
+	8: {
+		7: "P",
+		8: "P",
+		9: "P",
+		10: "D",
+		11: "D",
+		12: "P",
+		13: "P",
+		14: "P",
+		15: "P",
+		16: "P",
+		20: "Q",
+	},
+	9: {
+		7: "P",
+		8: "P",
+		9: "P",
+		10: "D",
+		11: "D",
+		12: "P",
+		13: "P",
+		14: "P",
+		15: "P",
+		16: "P",
+		20: "Q",
+	},
+	10: {
+		7: "P",
+		8: "P",
+		9: "P",
+		10: "P",
+		11: "D",
+		12: "P",
+		13: "P",
+		14: "P",
+		15: "P",
+		16: "P",
+		20: "Q",
+	},
+	As: {
+		7: "P",
+		8: "P",
+		9: "P",
+		10: "D",
+		11: "D",
+		12: "P",
+		13: "P",
+		14: "P",
+		15: "P",
+		16: "P",
+		20: "Q",
+	},
 };
 
 let matrizEstrategiaCartasBlandas = {
-    2: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "D",
-        7: "Q",
-        8: "Q",
-        9: "Q",
-    },
-    3: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "D",
-        7: "D/Q",
-        8: "Q",
-        9: "Q",
-    },
-    4: {
-        2: "D",
-        3: "D",
-        4: "D",
-        5: "D",
-        6: "D",
-        7: "D/Q",
-        8: "Q",
-        9: "Q",
-    },
-    5: {
-        2: "D",
-        3: "D",
-        4: "D",
-        5: "D",
-        6: "D",
-        7: "D/Q",
-        8: "Q",
-        9: "Q",
-    },
-    6: {
-        2: "D",
-        3: "D",
-        4: "D",
-        5: "D",
-        6: "D",
-        7: "D/Q",
-        8: "D/Q",
-        9: "Q",
-    },
-    7: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "Q",
-        8: "Q",
-        9: "Q",
-    },
-    8: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "Q",
-        8: "Q",
-        9: "Q",
-    },
-    9: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "P",
-        8: "Q",
-        9: "Q",
-    },
-    10: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "P",
-        8: "Q",
-        9: "Q",
-    },
-    As: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "Q",
-        8: "Q",
-        9: "Q",
-    },
+	2: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "D",
+		7: "Q",
+		8: "Q",
+		9: "Q",
+	},
+	3: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "D",
+		7: "D/Q",
+		8: "Q",
+		9: "Q",
+	},
+	4: {
+		2: "D",
+		3: "D",
+		4: "D",
+		5: "D",
+		6: "D",
+		7: "D/Q",
+		8: "Q",
+		9: "Q",
+	},
+	5: {
+		2: "D",
+		3: "D",
+		4: "D",
+		5: "D",
+		6: "D",
+		7: "D/Q",
+		8: "Q",
+		9: "Q",
+	},
+	6: {
+		2: "D",
+		3: "D",
+		4: "D",
+		5: "D",
+		6: "D",
+		7: "D/Q",
+		8: "D/Q",
+		9: "Q",
+	},
+	7: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "Q",
+		8: "Q",
+		9: "Q",
+	},
+	8: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "Q",
+		8: "Q",
+		9: "Q",
+	},
+	9: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "P",
+		8: "Q",
+		9: "Q",
+	},
+	10: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "P",
+		8: "Q",
+		9: "Q",
+	},
+	As: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "Q",
+		8: "Q",
+		9: "Q",
+	},
 };
 
 let matrizEstrategiaPares = {
-    2: {
-        2: "P/S",
-        3: "P/S",
-        4: "P",
-        5: "D",
-        6: "S",
-        7: "S",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    3: {
-        2: "S",
-        3: "P/S",
-        4: "P",
-        5: "D",
-        6: "S",
-        7: "S",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    4: {
-        2: "S",
-        3: "S",
-        4: "P/S",
-        5: "D",
-        6: "S",
-        7: "S",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    5: {
-        2: "S",
-        3: "S",
-        4: "D/S",
-        5: "D",
-        6: "S",
-        7: "S",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    6: {
-        2: "S",
-        3: "S",
-        4: "D/S",
-        5: "D",
-        6: "S",
-        7: "S",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    7: {
-        2: "S",
-        3: "S",
-        4: "P",
-        5: "D",
-        6: "S",
-        7: "S",
-        8: "S",
-        9: "Q",
-        10: "Q",
-        As: "S",
-    },
-    8: {
-        2: "P",
-        3: "P/S",
-        4: "P",
-        5: "D",
-        6: "P",
-        7: "S",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    9: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "D",
-        6: "P",
-        7: "P",
-        8: "S",
-        9: "S",
-        10: "Q",
-        As: "S",
-    },
-    10: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "Q",
-        8: "S",
-        9: "Q",
-        10: "Q",
-        As: "S",
-    },
-    As: {
-        2: "P",
-        3: "P",
-        4: "P",
-        5: "P",
-        6: "P",
-        7: "P",
-        8: "S",
-        9: "Q",
-        10: "Q",
-        As: "S",
-    },
+	2: {
+		2: "P/S",
+		3: "P/S",
+		4: "P",
+		5: "D",
+		6: "S",
+		7: "S",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	3: {
+		2: "S",
+		3: "P/S",
+		4: "P",
+		5: "D",
+		6: "S",
+		7: "S",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	4: {
+		2: "S",
+		3: "S",
+		4: "P/S",
+		5: "D",
+		6: "S",
+		7: "S",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	5: {
+		2: "S",
+		3: "S",
+		4: "D/S",
+		5: "D",
+		6: "S",
+		7: "S",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	6: {
+		2: "S",
+		3: "S",
+		4: "D/S",
+		5: "D",
+		6: "S",
+		7: "S",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	7: {
+		2: "S",
+		3: "S",
+		4: "P",
+		5: "D",
+		6: "S",
+		7: "S",
+		8: "S",
+		9: "Q",
+		10: "Q",
+		As: "S",
+	},
+	8: {
+		2: "P",
+		3: "P/S",
+		4: "P",
+		5: "D",
+		6: "P",
+		7: "S",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	9: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "D",
+		6: "P",
+		7: "P",
+		8: "S",
+		9: "S",
+		10: "Q",
+		As: "S",
+	},
+	10: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "Q",
+		8: "S",
+		9: "Q",
+		10: "Q",
+		As: "S",
+	},
+	As: {
+		2: "P",
+		3: "P",
+		4: "P",
+		5: "P",
+		6: "P",
+		7: "P",
+		8: "S",
+		9: "Q",
+		10: "Q",
+		As: "S",
+	},
 };
 
 let mazoInicial = [];
@@ -396,9 +396,7 @@ let juegoActual = 0;
 
 let jugadores = [];
 let manoCupier = [];
-let numCartasJugador = 1;
 let numCartasCrupier = 1;
-let numJugadores = 1;
 
 // Indica si la seleccion es para el Crupier o para el jugador
 const cardSelectionModal = document.getElementById("CardSelection");
@@ -410,156 +408,173 @@ cardSelectionModal.addEventListener("show.bs.modal", (event) => {
 });
 
 const reiniciarMazo = () => {
-    mazoInicial = [];
-    mazoUsado = [];
-    juegoActual = 0;
-    for (let i = 1; i <= 13; i++) {
-        let valor = 0;
+	mazoInicial = [];
+	mazoUsado = [];
+	juegoActual = 0;
+	for (let i = 1; i <= 13; i++) {
+		let valor = 0;
 
-        if (i >= 2 && i <= 6) valor = 1;
-        else if (i >= 7 && i <= 9) valor = 0;
-        else if (i == 1 || i >= 10) valor = -1;
-        let valor2 = i;
-        let numero = i.valueOf();
-        if (i == 1) {
-            numero = "As";
-            valor2 = 11;
-        } else if (i == 11) {
-            numero = "J";
-            valor2 = 10;
-        } else if (i == 12) {
-            numero = "Q";
-            valor2 = 10;
-        } else if (i == 13) {
-            numero = "K";
-            valor2 = 10;
-        }
+		if (i >= 2 && i <= 6) valor = 1;
+		else if (i >= 7 && i <= 9) valor = 0;
+		else if (i == 1 || i >= 10) valor = -1;
+		let valor2 = i;
+		let numero = i.valueOf();
+		if (i == 1) {
+			numero = "As";
+			valor2 = 11;
+		} else if (i == 11) {
+			numero = "J";
+			valor2 = 10;
+		} else if (i == 12) {
+			numero = "Q";
+			valor2 = 10;
+		} else if (i == 13) {
+			numero = "K";
+			valor2 = 10;
+		}
 
-        mazoInicial.push(new Carta(valor, valor2, numero, "Pica"));
-        mazoInicial.push(new Carta(valor, valor2, numero, "Corazon"));
-        mazoInicial.push(new Carta(valor, valor2, numero, "Trebol"));
-        mazoInicial.push(new Carta(valor, valor2, numero, "Diamante"));
-    }
+		mazoInicial.push(new Carta(valor, valor2, numero, "Pica"));
+		mazoInicial.push(new Carta(valor, valor2, numero, "Corazon"));
+		mazoInicial.push(new Carta(valor, valor2, numero, "Trebol"));
+		mazoInicial.push(new Carta(valor, valor2, numero, "Diamante"));
+	}
 };
 
 const seleccionarCarta = (numero, pinta, jugador) => {
-    //jugador = 1,2,3,4 ....
-    //jugador = "Cupier"
+	//jugador = 1,2,3,4 ....
+	//jugador = "Cupier"
 
-    let indice = mazoInicial.findIndex(
-        (elemento) => elemento.getCarta() == numero + pinta
-    );
-    
-    if (indice !== -1) {
-        let cartaSeleccionada = mazoInicial[indice];
-        mazoUsado.push(cartaSeleccionada);
-        mazoInicial.splice(indice, 1);
-        juegoActual += cartaSeleccionada.valor;
+	let indice = mazoInicial.findIndex(
+		(elemento) => elemento.getCarta() == numero + pinta
+	);
 
+	if (indice !== -1) {
+		let cartaSeleccionada = mazoInicial[indice];
+		mazoUsado.push(cartaSeleccionada);
+		mazoInicial.splice(indice, 1);
+		juegoActual += cartaSeleccionada.valor;
 
-        if (jugador == "Cupier") {
-            manoCupier.push(cartaSeleccionada);
-            return { valorMesa: juegoActual};
-        } else {
-            jugadores[jugador].manoActual.push(cartaSeleccionada);
-            return { valorMesa: juegoActual, estrategia: obtenerEstrategia(jugador), porcentaje: obtenerPorcentaje(jugador), acumulado: jugadores[jugador].acumulado};
-        }
-        
-    } else {
-        console.log("Carta no encontrada");
-    }
+		if (jugador == "Cupier") {
+			manoCupier.push(cartaSeleccionada);
+			return { valorMesa: juegoActual };
+		} else {
+			jugadores[jugador].manoActual.push(cartaSeleccionada);
+			return {
+				valorMesa: juegoActual,
+				estrategia: obtenerEstrategia(jugador),
+				porcentaje: obtenerPorcentaje(jugador),
+				acumulado: jugadores[jugador].acumulado,
+			};
+		}
+	} else {
+		console.log("Carta no encontrada");
+	}
 };
 
 const obtenerPorcentaje = (id_jugador) => {
-    const suma = jugadores[id_jugador].obtenerSumaManoActual();
-    let sirven = 0;
-    for (let i = 0; i < mazoInicial.length; i++) {
-        if((suma + mazoInicial[i].valor2) <=21 && (suma + mazoInicial[i].valor2)>=17){
-            sirven++;
-        }        
-    }
-    return parseInt((sirven/mazoInicial.length)*100);
-}
+	const suma = jugadores[id_jugador].obtenerSumaManoActual();
+	let sirven = 0;
+	for (let i = 0; i < mazoInicial.length; i++) {
+		if (
+			suma + mazoInicial[i].valor2 <= 21 &&
+			suma + mazoInicial[i].valor2 >= 17
+		) {
+			sirven++;
+		}
+	}
+	return parseInt((sirven / mazoInicial.length) * 100);
+};
 
 const obtenerEstrategia = (id_jugador) => {
-    if (manoCupier.length == 1 && jugadores[id_jugador].manoActual.length == 2) {
-        if (jugadores[id_jugador].manoActual[0].valor2 == jugadores[id_jugador].manoActual[1].valor2) {
-            //Estrategias pares
-            return matrizEstrategiaPares[manoCupier[0].valor2][
-                jugadores[id_jugador].manoActual[0].valor2
-            ];
-        } else if (
-            jugadores[id_jugador].manoActual[0].valor2 == "As" ||
-            jugadores[id_jugador].manoActual[1].valor2 == "As"
-        ) {
-            //Estrategias carta blanda
-            const cartaDistinta =
-            jugadores[id_jugador].manoActual[0].valor2 == "As"
-                    ? jugadores[id_jugador].manoActual[1].valor2
-                    : jugadores[id_jugador].manoActual[0].valor2;
-            if (cartaDistinta == 10) return "BlackJack";
-            return matrizEstrategiaCartasBlandas[manoCupier[0].valor2][
-                cartaDistinta
-            ];
-        } else {
-            //Estrategias carta dura
-            const suma = jugadores[id_jugador].obtenerSumaManoActual();
-            if (suma <= 7)
-                return matrizEstrategiaCartasDuras[manoCupier[0].valor2][7];
-            else if (suma >= 17)
-                return matrizEstrategiaCartasDuras[
-                    manoCupier[0].valor2
-                ][20];
-            else
-                return matrizEstrategiaCartasDuras[manoCupier[0].valor2][
-                    suma
-                ];
-        }
-    } else if(manoCupier.length == 1 && jugadores[id_jugador].manoActual.length > 2 && juegoActual >= 5) {
-        const suma = jugadores[id_jugador].obtenerSumaManoActual();
-        if(suma < 11){
-            return 'P';
-        }
-        else{
-            return 'Q';
-        }
-    }
-    else if(manoCupier.length == 1 && jugadores[id_jugador].manoActual.length > 2 && juegoActual <= -5) {
-        const suma = jugadores[id_jugador].obtenerSumaManoActual();
-        if(suma < 16){
-            return 'P';
-        }
-        else{
-            return 'Q';
-        }
-    }
-    else if(manoCupier.length == 1 && jugadores[id_jugador].manoActual.length > 2) {
-        const suma = jugadores[id_jugador].obtenerSumaManoActual();
-        if(suma < 17){
-            return 'P';
-        }
-        else{
-            return 'Q';
-        }
-    }
-    else{
-        return null;
-    }
+	if (
+		manoCupier.length == 1 &&
+		jugadores[id_jugador].manoActual.length == 2
+	) {
+		if (
+			jugadores[id_jugador].manoActual[0].valor2 ==
+			jugadores[id_jugador].manoActual[1].valor2
+		) {
+			//Estrategias pares
+			return matrizEstrategiaPares[manoCupier[0].valor2][
+				jugadores[id_jugador].manoActual[0].valor2
+			];
+		} else if (
+			jugadores[id_jugador].manoActual[0].valor2 == "As" ||
+			jugadores[id_jugador].manoActual[1].valor2 == "As"
+		) {
+			//Estrategias carta blanda
+			const cartaDistinta =
+				jugadores[id_jugador].manoActual[0].valor2 == "As"
+					? jugadores[id_jugador].manoActual[1].valor2
+					: jugadores[id_jugador].manoActual[0].valor2;
+			if (cartaDistinta == 10) return "BlackJack";
+			return matrizEstrategiaCartasBlandas[manoCupier[0].valor2][
+				cartaDistinta
+			];
+		} else {
+			//Estrategias carta dura
+			const suma = jugadores[id_jugador].obtenerSumaManoActual();
+			if (suma <= 7)
+				return matrizEstrategiaCartasDuras[manoCupier[0].valor2][7];
+			else if (suma >= 17)
+				return matrizEstrategiaCartasDuras[
+					manoCupier[0].valor2
+				][20];
+			else
+				return matrizEstrategiaCartasDuras[manoCupier[0].valor2][
+					suma
+				];
+		}
+	} else if (
+		manoCupier.length == 1 &&
+		jugadores[id_jugador].manoActual.length > 2 &&
+		juegoActual >= 5
+	) {
+		const suma = jugadores[id_jugador].obtenerSumaManoActual();
+		if (suma < 11) {
+			return "P";
+		} else {
+			return "Q";
+		}
+	} else if (
+		manoCupier.length == 1 &&
+		jugadores[id_jugador].manoActual.length > 2 &&
+		juegoActual <= -5
+	) {
+		const suma = jugadores[id_jugador].obtenerSumaManoActual();
+		if (suma < 16) {
+			return "P";
+		} else {
+			return "Q";
+		}
+	} else if (
+		manoCupier.length == 1 &&
+		jugadores[id_jugador].manoActual.length > 2
+	) {
+		const suma = jugadores[id_jugador].obtenerSumaManoActual();
+		if (suma < 17) {
+			return "P";
+		} else {
+			return "Q";
+		}
+	} else {
+		return "N/A";
+	}
 };
 
 const reiniciarManos = () => {
-    mano = [];
-    manoCupier = [];
+	mano = [];
+	manoCupier = [];
 };
 
 const agregarJugador = () => {
-    jugadores.push(new Jugador([], 0));
-}
+	jugadores.push(new Jugador([], 0));
+};
 
 const modificarAculadoJug = (id_jugador, valor) => {
-    jugadores[id_jugador].modificarAcumulado(valor);
-    return jugadores[id_jugador].acumulado;
-}
+	jugadores[id_jugador].modificarAcumulado(valor);
+	return jugadores[id_jugador].acumulado;
+};
 
 const updateCrupierCard = () => {
 	if (manoCupier.length != 0) {
@@ -586,30 +601,29 @@ const updateCrupierCard = () => {
 	}
 };
 
-const updatePlayerCard = () => {
+const updatePlayerCard = (jugador) => {
+	const playerCards = document.getElementById(`CardsPlayer-${jugador}`);
+	const manoJugador = jugadores[jugador].manoActual;
 	if (manoJugador.length != 0) {
-		for (let i = 1; i <= manoJugador.length; i++) {
-			const playerCard = manoJugador[i - 1];
-			const imgCard = document.getElementById(`PlayerCard-${i}`);
+		for (let i = 0; i < manoJugador.length; i++) {
+			const playerCard = manoJugador[i];
+			const imgCard = playerCards.children.item(i).firstElementChild;
 			imgCard.setAttribute("src", `imgs/${playerCard.getCarta()}.png`);
 			imgCard.setAttribute("alt", playerCard.getCarta());
 		}
 	} else {
-		const playerCardsContainerDiv = document
-			.getElementsByClassName("PlayerCardsContainer")
-			.item(0);
-		const basicHtml = `<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador">
-								<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="PlayerCard-1">
+		const basicHtml = `<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-${jugador}">
+								<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar">
 							</div>
 							<div class="CardAddContainer" onclick="addPlayerCard()">
 								<i class="bi bi-plus-lg"></i>
 							</div>`;
-		playerCardsContainerDiv.innerHTML = basicHtml;
+		playerCards.innerHTML = basicHtml;
 	}
 };
 
 // Actualiza las cartes, las seleccionadas anteriormente se deshabilitan
-const updateCards = (mano) => {
+const updateCards = (jugador) => {
 	for (const card of mazoUsado) {
 		const usedCard = document.getElementById(
 			`${card.numero + card.pinta}`
@@ -617,17 +631,21 @@ const updateCards = (mano) => {
 		usedCard.removeEventListener("click", clickCarta);
 		usedCard.style.opacity = "0.5";
 	}
-	if (mano == "Jugador") {
-		updatePlayerCard();
-	} else {
+	if (jugador == "Cupier") {
 		updateCrupierCard();
+	} else {
+		updatePlayerCard(jugador);
 	}
 };
 
 // Actualiza la estrategia mostrada en pantalla
-const updateStrategy = (strategy) => {
-	const strategyDisplay = document.getElementById("StrategyInfo");
-	strategyDisplay.textContent = strategy;
+const updateStrategy = (strategy, jugador) => {
+	if (jugador != "Cupier") {
+		const strategyDisplay = document.getElementById(
+			`StrategyInfoPlayer-${jugador}`
+		);
+		strategyDisplay.textContent = strategy;
+	}
 };
 
 // Actualiza el estado de la mesa mostrado en pantalla
@@ -666,35 +684,36 @@ const drawCards = () => {
 const clickCarta = (e) => {
 	const numero = e.target.getAttribute("data-numero");
 	const pinta = e.target.getAttribute("data-pinta");
-	const mano = document.getElementById("playerType").value;
-	resultado = seleccionarCarta(numero, pinta, mano);
-
-	if (resultado) {
-		updateStrategy(resultado.estrategia);
-		updateTableState(resultado.valorMesa);
+	let jugador = document.getElementById("playerType").value;
+	if (jugador != "Cupier") {
+		jugador = parseInt(jugador.substr(-1));
 	}
-	updateCards(mano);
+	resultado = seleccionarCarta(numero, pinta, jugador);
+
+	resultado.porcentaje;
+	resultado.acumulado;
+
+	updateTableState(resultado.valorMesa);
+	updateStrategy(resultado.estrategia, jugador);
+	updateCards(jugador);
 };
 
 // Añade una carta mas al total de cartas que dispone el jugador.
-const addPlayerCard = () => {
+const addPlayerCard = (jugador) => {
 	const cardContainerDiv = document.createElement("div");
 	const cardImg = document.createElement("img");
-	const addCartDiv = document
-		.getElementsByClassName("CardAddContainer")
-		.item(1);
-	const playerCardsContainerDiv = document
-		.getElementsByClassName("PlayerCardsContainer")
-		.item(0);
+	const playerCardsContainerDiv = document.getElementById(
+		`CardsPlayer-${jugador}`
+	);
+	const addCartDiv = playerCardsContainerDiv.lastElementChild;
 	cardContainerDiv.setAttribute("class", "CardContainer");
 	cardContainerDiv.setAttribute("data-bs-toggle", "modal");
 	cardContainerDiv.setAttribute("data-bs-target", "#CardSelection");
-	cardContainerDiv.setAttribute("data-bs-whatever", "Jugador");
+	cardContainerDiv.setAttribute("data-bs-whatever", `Jugador-${jugador}`);
 	Object.assign(cardImg, {
 		className: "img-fluid",
 		src: `imgs/Volteada.png`,
 		alt: `Carta sin seleccionar`,
-		id: `PlayerCard-${++numCartasJugador}`,
 	});
 	cardContainerDiv.append(cardImg);
 	addCartDiv.replaceWith(cardContainerDiv);
@@ -727,23 +746,25 @@ const addCrupierCard = () => {
 };
 
 const addPlayer = () => {
+	agregarJugador();
+	const playerNumber = jugadores.length - 1;
 	const divPlayersZone = document
 		.getElementsByClassName("PlayersZoneContainer")
 		.item(0);
 	const playerHtml = `<div class="PlayerContainer">
-							<h2 class="RolTittle">Jugador ${++numJugadores}</h2>
+							<h2 class="RolTittle">Jugador ${playerNumber + 1}</h2>
 							<div class="d-flex align-items-center">
 								<div class="StrategyContainer">
 									<div class="tittleContainer">
 										<h2 class="StrategyTittle">Mejor Estrategia</h2>
 									</div>
-									<h1 id="StrategyInfo">N/A</h1>
+									<h1 id="StrategyInfoPlayer-${playerNumber}">N/A</h1>
 								</div>
-								<div class="PlayerCardsContainer">
-									<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-${numJugadores}">
-										<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="PlayerCard-1">
+								<div class="PlayerCardsContainer" id="CardsPlayer-${playerNumber}">
+									<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-${playerNumber}">
+										<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar">
 									</div>
-									<div class="CardAddContainer" onclick="addPlayerCard()">
+									<div class="CardAddContainer" onclick="addPlayerCard(${playerNumber})">
 										<i class="bi bi-plus-lg"></i>
 									</div>
 								</div>
@@ -763,10 +784,10 @@ const addPlayer = () => {
 								</div>
 							</div>
 							<div class="d-flex justify-content-center">
-								<label for="Player${numJugadores}Bet">
+								<label for="Player${playerNumber}Bet">
 									<h2 class="BetTittle">Apuesta:</h2>
 								</label>
-								<input type="number" class="border-warning bg-transparent" id="Player${numJugadores}Bet">
+								<input type="number" class="border-warning bg-transparent" id="Player${playerNumber}Bet">
 								<button type="button" class="btn btn-outline-primary mx-1">Ganada</button>
 								<button type="button" class="btn btn-outline-danger mx-1">Perdida</button>
 								<button type="button" class="btn btn-outline-dark mx-1">BlackJack</button>
@@ -776,14 +797,18 @@ const addPlayer = () => {
 	divPlayersZone.innerHTML += playerHtml;
 };
 
-// Reinicia graficamente las cartas en la mesa
+// const getPlayerGameInfo = (jugador, typeOfInfo) => {
+// 	const
+// };
 
-const resetHand = () => {
-	numCartasJugador = 1;
+const resetHand = (jugador) => {
 	numCartasCrupier = 1;
 	reiniciarManos();
-	updateCrupierCard();
-	updatePlayerCard();
+	if (jugador == "Cupier") {
+		updateCrupierCard();
+	} else {
+		updatePlayerCard(jugador);
+	}
 	updateStrategy("N/A");
 };
 
@@ -797,21 +822,16 @@ const resetDeck = () => {
 
 reiniciarMazo();
 drawCards();
-
-
-agregarJugador();
-agregarJugador();
 agregarJugador();
 
+// console.log(seleccionarCarta(10,"Trebol","Cupier"));
 
-console.log(seleccionarCarta(10,"Trebol","Cupier"));
+// console.log(seleccionarCarta(5,"Trebol",0));
+// console.log(seleccionarCarta("As","Trebol",0));
 
-console.log(seleccionarCarta(5,"Trebol",0));
-console.log(seleccionarCarta("As","Trebol",0));
+// console.log(seleccionarCarta(8,"Corazon",1));
+// console.log(seleccionarCarta("As","Corazon",1));
 
-console.log(seleccionarCarta(8,"Corazon",1));
-console.log(seleccionarCarta("As","Corazon",1));
-
-console.log(seleccionarCarta(2,"Corazon",2));
-console.log(seleccionarCarta(3,"Corazon",2));
-console.log(seleccionarCarta(4,"Corazon",2));
+// console.log(seleccionarCarta(2,"Corazon",2));
+// console.log(seleccionarCarta(3,"Corazon",2));
+// console.log(seleccionarCarta(4,"Corazon",2));

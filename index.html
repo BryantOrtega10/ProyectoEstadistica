@@ -25,9 +25,6 @@
                 </div>
                 <h1 id="TableStateInfo">0</h1>
             </div>
-            <div class="ResetHandContainer d-flex align-items-center">
-                <button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand()">Reinciar Mano</button>
-            </div>
         </div>
         <div class="CrupierContainer">
             <h2 class="RolTittle">Crupier</h2>
@@ -44,17 +41,22 @@
             <div class="PlayerContainer">
                 <h2 class="RolTittle">Jugador 1</h2>
                 <div class="d-flex justify-content-center">
-                    <div class="StrategyContainer">
-                        <div class="tittleContainer">
-                            <h2 class="StrategyTittle">Mejor Estrategia</h2>
+                    <div class="d-flex align-items-center">
+                        <div class="StrategyContainer">
+                            <div class="tittleContainer">
+                                <h2 class="StrategyTittle">Mejor Estrategia</h2>
+                            </div>
+                            <h2 id="StrategyInfoPlayer-0">N/A</h2>
                         </div>
-                        <h1 id="StrategyInfo">N/A</h1>
+                        <div class="ResetHandContainer">
+                            <button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand(0)">Reinciar Mano</button>
+                        </div>
                     </div>
-                    <div class="PlayerCardsContainer">
-                        <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-1">
-                            <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="PlayerCard-1">
+                    <div class="PlayerCardsContainer" id="CardsPlayer-0">
+                        <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-0">
+                            <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar">
                         </div>
-                        <div class="CardAddContainer" onclick="addPlayerCard()">
+                        <div class="CardAddContainer" onclick="addPlayerCard(0)">
                             <i class="bi bi-plus-lg"></i>
                         </div>
                     </div>

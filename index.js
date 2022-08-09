@@ -636,7 +636,11 @@ const updateCards = (jugador) => {
 			`${card.numero + card.pinta}`
 		);
 		usedCard.removeEventListener("click", clickCarta);
-		usedCard.style.opacity = "0.5";
+		usedCard.style.opacity = "0.3";
+		usedCard.parentElement.setAttribute(
+			"class",
+			"imageSelectedContainer"
+		);
 	}
 	if (jugador == "Cupier") {
 		numCartasCrupier = manoCupier.length;

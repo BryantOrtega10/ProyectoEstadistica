@@ -378,6 +378,7 @@ let manoJugador = [];
 let manoCupier = [];
 let numCartasJugador = 1;
 let numCartasCrupier = 1;
+let numJugadores = 1;
 
 // Indica si la seleccion es para el Crupier o para el jugador
 const cardSelectionModal = document.getElementById("CardSelection");
@@ -649,6 +650,56 @@ const addCrupierCard = () => {
 	cardContainerDiv.append(cardImg);
 	addCardDiv.replaceWith(cardContainerDiv);
 	crupierCardsContainerDiv.append(addCardDiv);
+};
+
+const addPlayer = () => {
+	const divPlayersZone = document
+		.getElementsByClassName("PlayersZoneContainer")
+		.item(0);
+	const playerHtml = `<div class="PlayerContainer">
+							<h2 class="RolTittle">Jugador ${++numJugadores}</h2>
+							<div class="d-flex align-items-center">
+								<div class="StrategyContainer">
+									<div class="tittleContainer">
+										<h2 class="StrategyTittle">Mejor Estrategia</h2>
+									</div>
+									<h1 id="StrategyInfo">N/A</h1>
+								</div>
+								<div class="PlayerCardsContainer">
+									<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-${numJugadores}">
+										<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="PlayerCard-1">
+									</div>
+									<div class="CardAddContainer" onclick="addPlayerCard()">
+										<i class="bi bi-plus-lg"></i>
+									</div>
+								</div>
+								<div class="WinPercentageContainer">
+									<div class="tittleContainer">
+										<h2 class="TableStateTittle text-center">Posibilidades de pasarse</h2>
+									</div>
+									<div class="d-inline-flex" >
+										<h1 id="WinPercentage">0</h1>
+										<h1>%</h1>
+									</div>
+									<div class="d-inline-flex" >
+										<h2 class="WinAmountTittle">Total:</h2>
+										<h2>$</h2>
+										<h2 id="PlayerWinAmpunt">0</h2>
+									</div>
+								</div>
+							</div>
+							<div class="d-flex justify-content-center">
+								<label for="Player${numJugadores}Bet">
+									<h2 class="BetTittle">Apuesta:</h2>
+								</label>
+								<input type="number" class="border-warning bg-transparent" id="Player${numJugadores}Bet">
+								<button type="button" class="btn btn-outline-primary mx-1">Ganada</button>
+								<button type="button" class="btn btn-outline-danger mx-1">Perdida</button>
+								<button type="button" class="btn btn-outline-dark mx-1">BlackJack</button>
+							</div>
+						</div>
+						`;
+	divPlayersZone.innerHTML += playerHtml;
 };
 
 // Reinicia graficamente las cartas en la mesa

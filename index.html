@@ -15,10 +15,22 @@
         <div class="tittleContainer">
             <h1 class="BlackJackTittle">BLACK JACK</h1>
         </div>
-        <div class="CrupierContainer">
-            <div class="ResetDeckContainer">
-                <button type="button" class="btn btn-outline-warning" id="ResetDeckButton" onclick="resetDeck()">Reiniciar Mazo</button>
+        <div class="GameOptionsContainer">
+            <div class="ResetDeckContainer d-flex align-items-center">
+                <button type="button" class="btn btn-outline-warning btn-lg" id="ResetDeckButton" onclick="resetDeck()">Reiniciar Mazo</button>
             </div>
+            <div class="TableStateContainer">
+                <div class="tittleContainer">
+                    <h2 class="TableStateTittle text-center">Estado de la Mesa</h2>
+                </div>
+                <h1 id="TableStateInfo">0</h1>
+            </div>
+            <div class="ResetHandContainer d-flex align-items-center">
+                <button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand()">Reinciar Mano</button>
+            </div>
+        </div>
+        <div class="CrupierContainer">
+            <h2 class="RolTittle">Crupier</h2>
             <div class="CrupierCardsContainer">
                 <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Cupier">
                     <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="CrupierCard-1">
@@ -27,30 +39,57 @@
                     <i class="bi bi-plus-lg"></i>
                 </div>
             </div>
-            <div class="ResetHandContainer">
-                <button type="button" class="btn btn-outline-warning" id="ResetHandButton" onclick="resetHand()">Reinciar Mano</button>
+        </div>
+        <div class="PlayersZoneContainer">
+            <div class="PlayerContainer">
+                <h2 class="RolTittle">Jugador 1</h2>
+                <div class="d-flex justify-content-center">
+                    <div class="StrategyContainer">
+                        <div class="tittleContainer">
+                            <h2 class="StrategyTittle">Mejor Estrategia</h2>
+                        </div>
+                        <h1 id="StrategyInfo">N/A</h1>
+                    </div>
+                    <div class="PlayerCardsContainer">
+                        <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-1">
+                            <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="PlayerCard-1">
+                        </div>
+                        <div class="CardAddContainer" onclick="addPlayerCard()">
+                            <i class="bi bi-plus-lg"></i>
+                        </div>
+                    </div>
+                    <div class="WinPercentageContainer">
+                        <div class="tittleContainer">
+                            <h2 class="TableStateTittle text-center">Posibilidades de pasarse</h2>
+                        </div>
+                        <div class="d-inline-flex" >
+                            <h1 id="WinPercentage">0</h1>
+                            <h1>%</h1>
+                        </div>
+                        <div class="d-inline-flex" >
+                            <h2 class="WinAmountTittle">Total:</h2>
+                            <h2>$</h2>
+                            <h2 id="PlayerWinAmpunt">0</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <label for="Player1Bet">
+                        <h2 class="BetTittle">Apuesta:</h2>
+                    </label>
+                    <input type="number" class="border-warning bg-transparent" id="Player1Bet">
+                    <button type="button" class="btn btn-outline-primary mx-1">Ganada</button>
+                    <button type="button" class="btn btn-outline-danger mx-1">Perdida</button>
+                    <button type="button" class="btn btn-outline-dark mx-1">BlackJack</button>
+                </div>
             </div>
         </div>
-        <div class="PlayerContainer">
-            <div class="StrategyContainer">
-                <div class="tittleContainer">
-                    <h1 class="StrategyTittle">Mejor Estrategia</h1>
-                </div>
-                <h1 id="StrategyInfo">N/A</h1>
-            </div>
-            <div class="PlayerCardsContainer">
-                <div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador">
-                    <img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar" id="PlayerCard-1">
-                </div>
-                <div class="CardAddContainer" onclick="addPlayerCard()">
-                    <i class="bi bi-plus-lg"></i>
-                </div>
-            </div>
-            <div class="TableStateContainer">
-                <div class="tittleContainer">
-                    <h1 class="TableStateTittle">Estado de la Mesa</h1>
-                </div>
-                <h1 id="TableStateInfo">0</h1>
+        <div class="w-100 d-flex justify-content-center mb-3">
+            <div class="AddPlayerContainer" onclick="addPlayer()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                  </svg>
             </div>
         </div>
         <div class="modal fade" id="CardSelection" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">

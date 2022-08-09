@@ -4,7 +4,8 @@ html, body {
 }
 
 .GameTable{
-    height: 100%;
+   width: 100%;
+    height: auto;
     background-color: rgb(26 96 5);
     border: 22px inset #6F4A4A;
  }
@@ -16,18 +17,32 @@ html, body {
     color: yellow;
  }
 
+ .GameOptionsContainer{
+   /* From https://css.glass */
+   width: 70%;
+   margin: auto;
+   background: rgba(255, 255, 255, 0.05);
+   border-radius: 16px;
+   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+   backdrop-filter: blur(4.9px);
+   -webkit-backdrop-filter: blur(4.9px);
+   border: 1px solid rgba(255, 255, 255, 0.8);
+ }
+
  .BlackJackTittle{
     color: white;
     padding: 5px;
  }
 
  .CrupierContainer, .PlayerContainer{
-    margin-top: 20px;
+   margin-top: 20px;
     margin-bottom: 20px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
  }
+
+
 
  .ResetDeckContainer, .ResetHandContainer{
    display: flex;
@@ -35,7 +50,7 @@ html, body {
    width: 400px;
  }
 
- .PlayerCardsContainer, .CrupierCardsContainer{
+ .PlayerCardsContainer, .CrupierCardsContainer, .GameOptionsContainer{
    display: flex;
    justify-content: center;
  }
@@ -48,8 +63,9 @@ html, body {
     margin-right: 5px;
  }
 
- .CardAddContainer{
+ .CardAddContainer, .AddPlayerContainer{
     border: 2px dashed yellow;
+    color: yellow;
     width: 140px;
     height: 240px;
     margin-left: 5px;
@@ -59,11 +75,12 @@ html, body {
     align-items: center;
  }
 
- .StrategyContainer, .TableStateContainer{
+ .StrategyContainer, .TableStateContainer, .WinPercentageContainer{
    display: flex;
    flex-direction: column;
    align-items: center;
-   width: 500px;
+   padding: 50px;
+   width: 400px;
  }
  
  .bi-plus-lg{
@@ -80,12 +97,13 @@ html, body {
    transform: translateY(-5px);
 }
 
-.modal-content{
-   /* From https://css.glass */
-   background: rgba(255, 255, 255, 0.2);
-   border-radius: 16px;
-   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-   backdrop-filter: blur(5px);
-   -webkit-backdrop-filter: blur(5px);
-   border: 1px solid rgba(255, 255, 255, 0.3);
+.RolTittle {
+   color: white;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.WinAmountTittle, .BetTittle{
+   color: yellow;
+   margin-right: 5px;
 }

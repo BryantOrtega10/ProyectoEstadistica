@@ -1,7 +1,8 @@
 class Carta {
-    constructor(valor, valor2, numero, pinta) {
+    constructor(valor, valor2, valor3 , numero, pinta) {
         this.valor = valor; //+1, 0, -1
         this.valor2 = valor2; //2,3, ..., 11
+        this.valor3 = valor3; //2,3, ..., 11
         this.numero = numero; //As,2,...,J,Q,K
         this.pinta = pinta; //Picas, Corazon, Trebol, Diamante
     }
@@ -419,25 +420,30 @@ const reiniciarMazo = () => {
         else if (i >= 7 && i <= 9) valor = 0;
         else if (i == 1 || i >= 10) valor = -1;
         let valor2 = i;
+        let valor3 = i;
         let numero = i.valueOf();
         if (i == 1) {
             numero = "As";
             valor2 = 11;
+            valor3 = "As";
         } else if (i == 11) {
             numero = "J";
             valor2 = 10;
+            valor3 = 10;
         } else if (i == 12) {
             numero = "Q";
             valor2 = 10;
+            valor3 = 10;
         } else if (i == 13) {
             numero = "K";
             valor2 = 10;
+            valor3 = 10;
         }
 
-        mazoInicial.push(new Carta(valor, valor2, numero, "Pica"));
-        mazoInicial.push(new Carta(valor, valor2, numero, "Corazon"));
-        mazoInicial.push(new Carta(valor, valor2, numero, "Trebol"));
-        mazoInicial.push(new Carta(valor, valor2, numero, "Diamante"));
+        mazoInicial.push(new Carta(valor, valor2, valor3, numero, "Pica"));
+        mazoInicial.push(new Carta(valor, valor2, valor3, numero, "Corazon"));
+        mazoInicial.push(new Carta(valor, valor2, valor3, numero, "Trebol"));
+        mazoInicial.push(new Carta(valor, valor2, valor3, numero, "Diamante"));
     }
 };
 
@@ -484,7 +490,7 @@ const obtenerEstrategia = (id_jugador) => {
     if (manoCupier.length == 1 && jugadores[id_jugador].manoActual.length == 2) {
         if (jugadores[id_jugador].manoActual[0].valor2 == jugadores[id_jugador].manoActual[1].valor2) {
             //Estrategias pares
-            return matrizEstrategiaPares[manoCupier[0].valor2][
+            return matrizEstrategiaPares[manoCupier[0].valor3][
                 jugadores[id_jugador].manoActual[0].valor2
             ];
         } else if (
@@ -497,20 +503,20 @@ const obtenerEstrategia = (id_jugador) => {
                     ? jugadores[id_jugador].manoActual[1].valor2
                     : jugadores[id_jugador].manoActual[0].valor2;
             if (cartaDistinta == 10) return "BlackJack";
-            return matrizEstrategiaCartasBlandas[manoCupier[0].valor2][
+            return matrizEstrategiaCartasBlandas[manoCupier[0].valor3][
                 cartaDistinta
             ];
         } else {
             //Estrategias carta dura
             const suma = jugadores[id_jugador].obtenerSumaManoActual();
             if (suma <= 7)
-                return matrizEstrategiaCartasDuras[manoCupier[0].valor2][7];
+                return matrizEstrategiaCartasDuras[manoCupier[0].valor3][7];
             else if (suma >= 17)
                 return matrizEstrategiaCartasDuras[
-                    manoCupier[0].valor2
+                    manoCupier[0].valor3
                 ][20];
             else
-                return matrizEstrategiaCartasDuras[manoCupier[0].valor2][
+                return matrizEstrategiaCartasDuras[manoCupier[0].valor3][
                     suma
                 ];
         }

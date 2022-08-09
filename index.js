@@ -571,7 +571,6 @@ const obtenerEstrategia = (id_jugador) => {
 };
 
 const reiniciarManos = () => {
-	mano = [];
 	manoCupier = [];
 };
 
@@ -623,7 +622,7 @@ const updatePlayerCard = (jugador) => {
 		const basicHtml = `<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-${jugador}">
 								<img class="img-fluid" src="imgs/Volteada.png" alt="Carta sin seleccionar">
 							</div>
-							<div class="CardAddContainer" onclick="addPlayerCard()">
+							<div class="CardAddContainer" onclick="addPlayerCard(${jugador})">
 								<i class="bi bi-plus-lg"></i>
 							</div>`;
 		playerCards.innerHTML = basicHtml;
@@ -640,6 +639,7 @@ const updateCards = (jugador) => {
 		usedCard.style.opacity = "0.5";
 	}
 	if (jugador == "Cupier") {
+		numCartasCrupier = manoCupier.length;
 		updateCrupierCard();
 	} else {
 		updatePlayerCard(jugador);
@@ -652,7 +652,7 @@ const updateStrategy = (strategy, jugador) => {
 		const strategyDisplay = document.getElementById(
 			`StrategyInfoPlayer-${jugador}`
 		);
-		strategyDisplay.textContent = strategy;
+		strategyDisplay.textContent = strategy == null ? "N/A" : strategy;
 	}
 };
 
@@ -660,6 +660,34 @@ const updateStrategy = (strategy, jugador) => {
 const updateTableState = (tableState) => {
 	const tableStateDisplay = document.getElementById("TableStateInfo");
 	tableStateDisplay.textContent = tableState;
+};
+
+// Actualiza el porcentaje del jugador
+const updatePlayerPercentage = (percentage, player) => {
+	if (player != "Cupier") {
+		const playerPercentageDisplay = document.getElementById(
+			`WinPercentagePlayer-${player}`
+		);
+		playerPercentageDisplay.textContent = percentage;
+	}
+};
+
+// Actualiza la cantidad ganada por el jugador, dependiendo del boton puslado.
+const updatePlayerTotal = (playerNumber, betType) => {
+	let total = parseInt(
+		document.getElementById(`BetPlayer-${playerNumber}`).value
+	);
+	const player = jugadores[playerNumber];
+	const playerTotalDisplay = document.getElementById(
+		`TotalWinPlayer-${playerNumber}`
+	);
+	if (betType == "Perdida") {
+		total = -1 * total;
+	} else if (betType == "BlackJack") {
+		total = (3 / 2) * total;
+	}
+	player.modificarAcumulado(total);
+	playerTotalDisplay.textContent = player.acumulado;
 };
 
 // Pone las imgs de todas las cartas en el modal
@@ -697,13 +725,10 @@ const clickCarta = (e) => {
 		jugador = parseInt(jugador.substr(-1));
 	}
 	resultado = seleccionarCarta(numero, pinta, jugador);
-
-	resultado.porcentaje;
-	resultado.acumulado;
-
 	updateTableState(resultado.valorMesa);
 	updateStrategy(resultado.estrategia, jugador);
 	updateCards(jugador);
+	updatePlayerPercentage(resultado.porcentaje, jugador);
 };
 
 // Añade una carta mas al total de cartas que dispone el jugador.
@@ -761,12 +786,23 @@ const addPlayer = () => {
 		.item(0);
 	const playerHtml = `<div class="PlayerContainer">
 							<h2 class="RolTittle">Jugador ${playerNumber + 1}</h2>
-							<div class="d-flex align-items-center">
-								<div class="StrategyContainer">
-									<div class="tittleContainer">
-										<h2 class="StrategyTittle">Mejor Estrategia</h2>
+							<div class="d-flex justify-content-center">
+								<div class="container">
+									<div class="row justify-content-center">
+										<div class="col-auto">
+											<h2 class="StrategyTittle">Mejor Estrategia</h2>
+										</div>
 									</div>
-									<h1 id="StrategyInfoPlayer-${playerNumber}">N/A</h1>
+									<div class="row justify-content-center">
+										<div class="col-auto">
+											<h2 id="StrategyInfoPlayer-${playerNumber}">N/A</h2>
+										</div>
+									</div>
+									<div class="row justify-content-center mt-5">
+										<div class="col-auto">
+											<button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand(${playerNumber})">Reinciar Mano</button>
+										</div>
+									</div>
 								</div>
 								<div class="PlayerCardsContainer" id="CardsPlayer-${playerNumber}">
 									<div class="CardContainer" data-bs-toggle="modal" data-bs-target="#CardSelection" data-bs-whatever="Jugador-${playerNumber}">
@@ -776,29 +812,55 @@ const addPlayer = () => {
 										<i class="bi bi-plus-lg"></i>
 									</div>
 								</div>
-								<div class="WinPercentageContainer">
-									<div class="tittleContainer">
-										<h2 class="TableStateTittle text-center">Posibilidades de pasarse</h2>
+								<div class="container">
+									<div class="row justify-content-center">
+										<div class="col-auto">
+											<div class="tittleContainer">
+												<h2 class="TableStateTittle text-center">Posibilidades de juego seguro (17-21)</h2>
+											</div>
+										</div>
 									</div>
-									<div class="d-inline-flex" >
-										<h1 id="WinPercentage">0</h1>
-										<h1>%</h1>
+									<div class="row justify-content-center g-0">
+										<div class="col-auto">
+											<h2 id="WinPercentagePlayer-${playerNumber}">0</h2>
+										</div>
+										<div class="col-auto">
+											<h2>%</h2>
+										</div>
 									</div>
-									<div class="d-inline-flex" >
-										<h2 class="WinAmountTittle">Total:</h2>
-										<h2>$</h2>
-										<h2 id="PlayerWinAmpunt">0</h2>
+									<div class="row justify-content-center mt-5">
+										<div class="col-auto">
+											<h2 class="WinAmountTittle">Total:</h2>
+										</div>
+										<div class="col-auto g-0">
+											<h2>$</h2>
+										</div>
+										<div class="col-auto g-0">
+											<h2 id="TotalWinPlayer-${playerNumber}">0</h2>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="container mt-3">
+								<div class="row justify-content-center align-items-center">
+									<label for="BetPlayer-${playerNumber}" class="col-auto col-form-label g-0">
+										<h3 class="BetTittle">Apuesta</h3>
+									</label>
+									<div class="col-auto g-0 me-2">
+										<input type="number" class="border-warning bg-transparent" id="BetPlayer-${playerNumber}">
+									</div>
+									<div class="col-auto g-0">
+										<button type="button" class="btn btn-outline-primary mx-1" onclick="updatePlayerTotal(${playerNumber}, 'Ganada')">Ganada</button>
+									</div>
+									<div class="col-auto g-0">
+										<button type="button" class="btn btn-outline-danger mx-1" onclick="updatePlayerTotal(${playerNumber}, 'Perdida')">Perdida</button>
+									</div>
+									<div class="col-auto g-0">
+										<button type="button" class="btn btn-outline-dark mx-1" onclick="updatePlayerTotal(${playerNumber}, 'BlackJack')">BlackJack</button>
 									</div>
 								</div>
 							</div>
 							<div class="d-flex justify-content-center">
-								<label for="Player${playerNumber}Bet">
-									<h2 class="BetTittle">Apuesta:</h2>
-								</label>
-								<input type="number" class="border-warning bg-transparent" id="Player${playerNumber}Bet">
-								<button type="button" class="btn btn-outline-primary mx-1">Ganada</button>
-								<button type="button" class="btn btn-outline-danger mx-1">Perdida</button>
-								<button type="button" class="btn btn-outline-dark mx-1">BlackJack</button>
 							</div>
 						</div>
 						`;
@@ -810,21 +872,26 @@ const addPlayer = () => {
 // };
 
 const resetHand = (jugador) => {
-	numCartasCrupier = 1;
 	reiniciarManos();
 	if (jugador == "Cupier") {
+		numCartasCrupier = 0;
 		updateCrupierCard();
 	} else {
+		jugadores[jugador].reiniciarMano();
 		updatePlayerCard(jugador);
+		updateStrategy("N/A", jugador);
+		updatePlayerPercentage(0, jugador);
 	}
-	updateStrategy("N/A");
 };
 
 // Reinicia graficamente las cartas del mazo
 const resetDeck = () => {
 	reiniciarMazo();
 	drawCards();
-	resetHand();
+	resetHand("Cupier");
+	for (let numJugador = 0; numJugador < jugadores.length; numJugador++) {
+		resetHand(numJugador);
+	}
 	updateTableState(0);
 };
 

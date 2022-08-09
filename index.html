@@ -25,6 +25,9 @@
                 </div>
                 <h1 id="TableStateInfo">0</h1>
             </div>
+            <div class="ResetHandCrupierContainer d-flex align-items-center">
+                <button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand('Cupier')">Reinciar Mano Crupier</button>
+            </div>
         </div>
         <div class="CrupierContainer">
             <h2 class="RolTittle">Crupier</h2>
@@ -41,15 +44,21 @@
             <div class="PlayerContainer">
                 <h2 class="RolTittle">Jugador 1</h2>
                 <div class="d-flex justify-content-center">
-                    <div class="d-flex align-items-center">
-                        <div class="StrategyContainer">
-                            <div class="tittleContainer">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
                                 <h2 class="StrategyTittle">Mejor Estrategia</h2>
                             </div>
-                            <h2 id="StrategyInfoPlayer-0">N/A</h2>
                         </div>
-                        <div class="ResetHandContainer">
-                            <button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand(0)">Reinciar Mano</button>
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <h2 id="StrategyInfoPlayer-0">N/A</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center mt-5">
+                            <div class="col-auto">
+                                <button type="button" class="btn btn-outline-warning btn-lg" id="ResetHandButton" onclick="resetHand(${playerNumber})">Reinciar Mano</button>
+                            </div>
                         </div>
                     </div>
                     <div class="PlayerCardsContainer" id="CardsPlayer-0">
@@ -60,33 +69,59 @@
                             <i class="bi bi-plus-lg"></i>
                         </div>
                     </div>
-                    <div class="WinPercentageContainer">
-                        <div class="tittleContainer">
-                            <h2 class="TableStateTittle text-center">Posibilidades de pasarse</h2>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-auto">
+                                <div class="tittleContainer">
+                                    <h2 class="TableStateTittle text-center">Posibilidades de juego seguro (17-21)</h2>
+                                </div>
+                            </div>
                         </div>
-                        <div class="d-inline-flex" >
-                            <h1 id="WinPercentage">0</h1>
-                            <h1>%</h1>
+                        <div class="row justify-content-center g-0">
+                            <div class="col-auto">
+                                <h2 id="WinPercentagePlayer-0">0</h2>
+                            </div>
+                            <div class="col-auto">
+                                <h2>%</h2>
+                            </div>
                         </div>
-                        <div class="d-inline-flex" >
-                            <h2 class="WinAmountTittle">Total:</h2>
-                            <h2>$</h2>
-                            <h2 id="PlayerWinAmpunt">0</h2>
+                        <div class="row justify-content-center mt-5">
+                            <div class="col-auto">
+                                <h2 class="WinAmountTittle">Total:</h2>
+                            </div>
+                            <div class="col-auto g-0">
+                                <h2>$</h2>
+                            </div>
+                            <div class="col-auto g-0">
+                                <h2 id="TotalWinPlayer-0">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-3">
+                    <div class="row justify-content-center align-items-center">
+                        <label for="BetPlayer-0" class="col-auto col-form-label g-0">
+                            <h3 class="BetTittle">Apuesta</h3>
+                        </label>
+                        <div class="col-auto g-0 me-2">
+                            <input type="number" class="border-warning bg-transparent" id="BetPlayer-0" required>
+                        </div>
+                        <div class="col-auto g-0">
+                            <button type="button" class="btn btn-outline-primary mx-1" onclick="updatePlayerTotal(0, 'Ganada')">Ganada</button>
+                        </div>
+                        <div class="col-auto g-0">
+                            <button type="button" class="btn btn-outline-danger mx-1" onclick="updatePlayerTotal(0, 'Perdida')">Perdida</button>
+                        </div>
+                        <div class="col-auto g-0">
+                            <button type="button" class="btn btn-outline-dark mx-1" onclick="updatePlayerTotal(0, 'BlackJack')">BlackJack</button>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <label for="Player1Bet">
-                        <h2 class="BetTittle">Apuesta:</h2>
-                    </label>
-                    <input type="number" class="border-warning bg-transparent" id="Player1Bet">
-                    <button type="button" class="btn btn-outline-primary mx-1">Ganada</button>
-                    <button type="button" class="btn btn-outline-danger mx-1">Perdida</button>
-                    <button type="button" class="btn btn-outline-dark mx-1">BlackJack</button>
                 </div>
             </div>
         </div>
-        <div class="w-100 d-flex justify-content-center mb-3">
+        <div class="w-100 d-flex justify-content-center mb-3 border-top border-1 border-white p-2">
             <div class="AddPlayerContainer" onclick="addPlayer()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
                     <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
